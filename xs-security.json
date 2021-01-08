@@ -1,0 +1,32 @@
+{
+	"xsappname": "theme-mta",
+	"tenant-mode": "dedicated",
+	"description": "Security profile of called application",
+	"scopes": [
+        {
+            "name": "uaa.user",
+            "description": "UAA"
+        },{
+            "name": "$XSAPPNAME.ThemeUser",
+            "description": "Theme User Scope"
+        },{
+            "name": "$XSAPPNAME.ThemeAdmin",
+            "description": "Theme Administrator Scope"
+        }
+    ],
+	"role-templates": [
+        {
+            "name": "ThemeUser",
+            "description": "Theme User Role template",
+            "scope-references": ["$XSAPPNAME.ThemeUser", "uaa.user"]
+        },
+        {
+            "name": "ThemeAdmin",
+            "description": "Theme Administrator Role template",
+            "scope-references": ["$XSAPPNAME.ThemeAdmin","$XSAPPNAME.ThemeUser", "uaa.user"]
+        }        
+    ],
+	"oauth2-configuration": {
+		"system-attributes": ["rolecollections"]
+	}
+}

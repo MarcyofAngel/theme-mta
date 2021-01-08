@@ -1,0 +1,48 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ns.HTML5Module.controller.App" displayBlock="true">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+				<content>
+				    <VBox width="100%" direction="Column" id="vbox0">
+				        <items>
+				            <Breadcrumbs xmlns="sap.m" currentLocationText="Location" id="breadcrumbs0">
+				        <Link text="Level 1"/>
+				        <Link text="Level 2"/>
+				        </Breadcrumbs>
+				            <Slider xmlns="sap.m" value="30" id="slider0"/>
+				            <sap.ui.layout.form:Form editable="true" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="form0">
+				                <sap.ui.layout.form:formContainers>
+				                    <sap.ui.layout.form:FormContainer title="Title" id="container0">
+				                        <sap.ui.layout.form:formElements>
+				                            <sap.ui.layout.form:FormElement label="Label" id="element0">
+				                                <sap.ui.layout.form:fields>
+				                                    <Input width="100%" id="input0"/>
+				                                </sap.ui.layout.form:fields>
+				                            </sap.ui.layout.form:FormElement>
+				                        </sap.ui.layout.form:formElements>
+				                    </sap.ui.layout.form:FormContainer>
+				                </sap.ui.layout.form:formContainers>
+				                <sap.ui.layout.form:layout>
+				                    <sap.ui.layout.form:ResponsiveGridLayout id="layout0"/>
+				                </sap.ui.layout.form:layout></sap.ui.layout.form:Form>
+				            <TextArea xmlns="sap.m" value="Lorem ipsum dolor" rows="4" id="area0"/>
+				            <RadioButtonGroup xmlns="sap.m" columns="1" id="group0">
+				                <buttons>
+				                    <RadioButton text="Option One" id="button5"/>
+				                    <RadioButton text="Option Two" id="button6"/>
+				                    </buttons>
+				                
+				            </RadioButtonGroup>
+				            <Switch xmlns="sap.m" id="switch0"/>
+				            <sap.ui.unified:Calendar xmlns:sap.ui.unified="sap.ui.unified" id="calendar0"/>
+				            <Button xmlns="sap.m" text="Button" id="button2"/>
+				            <ToggleButton xmlns="sap.m" text="Toggle Button" id="button3"/>
+				        </items>
+				    </VBox>
+				</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

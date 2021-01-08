@@ -1,0 +1,83 @@
+_schema-version: "3.2"
+ID: theme-mta
+version: 0.0.1
+modules:
+- name: theme-mta-approuter
+  type: approuter.nodejs
+  path: theme-mta-approuter
+  requires:
+  - name: theme-mta_html_repo_runtime
+  - name: theme-mta-uaa
+  - name: theme-mta-theming
+  - name: portal_resources_theme-mta
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: theme-mta_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: theme-mta_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - HTML5Module-content.zip
+      name: HTML5Module
+      target-path: resources/
+- name: HTML5Module
+  type: html5
+  path: HTML5Module
+  requires:
+    - name: theme-mta-theming
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+- name: theme-mta-launchpad
+  type: com.sap.portal.content
+  path: theme-mta-launchpad
+  requires:
+  - name: portal_resources_theme-mta
+  - name: theme-mta_html_repo_host
+  - name: theme-mta_ui_deployer
+  - name: theme-mta-uaa
+  parameters:
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
+    memory: 128M
+    stack: cflinuxfs3
+resources:
+- name: theme-mta_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: theme-mta_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: portal_resources_theme-mta
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: portal
+    service-plan: standard
+- name: theme-mta-uaa
+  type: com.sap.xs.uaa
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-plan: application
+- name: theme-mta-theming
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: theming
+    service-plan: standard
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install
